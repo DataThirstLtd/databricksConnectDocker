@@ -21,6 +21,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
 RUN echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
 
+
 RUN apt-get update --fix-missing && \
     apt-get install -y wget bzip2 ca-certificates curl git && \
     apt-get clean && \
@@ -32,21 +33,19 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
     /opt/conda/bin/conda clean -tipsy && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
+    echo "conda activate dbconnect" >> ~/.bashrc
+
 
 ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 RUN chmod +x /usr/bin/tini
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD  "printf 'y\n${DATABRICKSHOST}\n${DATABRICKSTOKEN}\n${DATABRICKSCLUSTERID}\n${DATABRICKSORGID}\n\n' | databricks-connect configure" 
 
-ENTRYPOINT [ "/usr/bin/tini", "--" ]
-CMD [ "/bin/bash" ]
 
-RUN conda create --name dbconnect python=3.7.3
-
-RUN echo "conda activate dbconnect" >> ~/.bashrc
-
+COPY environment.yml .
 RUN pip install --upgrade pip \
-    && pip install databricks-connect==$DBCVER
+    && conda env create -f environment.yml
 
 # VSCode DevContainers
 RUN apt-get update \
@@ -69,3 +68,4 @@ ENV DEBIAN_FRONTEND=dialog
 
 # Allow for a consistant java home location for settings - image is changing over time
 RUN if [ ! -d "/docker-java-home" ]; then ln -s "${JAVA_HOME}" /docker-java-home; fi
+
