@@ -1,6 +1,7 @@
 # Docker
 # Build a Docker image 
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+# Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
 
 trigger:
 - master
@@ -18,14 +19,24 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
       - task: Docker@2
+        displayName: Build
         inputs:
+          command: build
           containerRegistry: 'DockerHub'
-          repository: 'dbconnect'
-          command: 'buildAndPush'
-          Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-          arguments: --DBCVER=$(DBCVER)
+          repository: dbconnect
           tags: |
             $(Build.BuildId)
             beta
             $(DBCVER)
-        
+          arguments: --DBCVER=$(DBCVER)
+
+      - task: Docker@2
+        displayName: Push
+        inputs:
+          command: push
+          containerRegistry: 'DockerHub'
+          repository: dbconnect
+          tags: |
+            $(Build.BuildId)
+            beta
+            $(DBCVER)
