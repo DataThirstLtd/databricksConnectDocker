@@ -8,9 +8,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-  tag: |
-    $(Build.BuildId)
 stages:
 - stage: Build
   displayName: Build image
@@ -26,6 +23,9 @@ stages:
           repository: 'dbconnect'
           command: 'buildAndPush'
           Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+          arguments: --DBCVER=$(DBCVER)
           tags: |
-            $(tag)
+            $(Build.BuildId)
+            beta
+            $(DBCVER)
         
