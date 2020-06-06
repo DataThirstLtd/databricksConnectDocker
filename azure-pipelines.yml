@@ -1,0 +1,32 @@
+# Docker
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: |
+    '$(Build.BuildId)'
+    'beta'
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - task: BuildImage
+        inputs:
+          containerRegistry: 'DockerHub'
+          repository: 'dbconnect'
+          command: 'buildAndPush'
+          Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+          tags: |
+            $(tag)
+        
