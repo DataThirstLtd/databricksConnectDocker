@@ -21,7 +21,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-      - task: BuildImage
+      - task: Docker@2
         inputs:
           containerRegistry: 'DockerHub'
           repository: 'dbconnect'
