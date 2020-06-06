@@ -33,7 +33,7 @@ stages:
           repository: datathirstltd/dbconnect
           tags: |
             $(Build.BuildId)
-            beta
+            latest
             $(DBCVER)
           arguments: --build-arg DBCVER=$(DBCVER)
 
@@ -69,7 +69,7 @@ stages:
           repository: datathirstltd/dbconnect
           tags: |
             $(Build.BuildId)
-            beta
+            latest
             $(DBCVER)
           arguments: --build-arg DBCVER=$(DBCVER)
 
