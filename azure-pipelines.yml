@@ -28,7 +28,7 @@ stages:
         inputs:
           command: build
           containerRegistry: 'DockerHub'
-          repository: dbconnect
+          repository: datathirstltd/dbconnect
           tags: |
             $(Build.BuildId)
             beta
@@ -40,7 +40,7 @@ stages:
         inputs:
           command: push
           containerRegistry: 'DockerHub'
-          repository: dbconnect
+          repository: datathirstltd/dbconnect
           tags: |
             $(Build.BuildId)
             beta
