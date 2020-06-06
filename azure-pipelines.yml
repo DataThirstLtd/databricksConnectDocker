@@ -28,7 +28,7 @@ stages:
             $(Build.BuildId)
             beta
             $(DBCVER)
-          arguments: --DBCVER=$(DBCVER)
+          arguments: --build-arg DBCVER=$(DBCVER)
 
       - task: Docker@2
         displayName: Push
