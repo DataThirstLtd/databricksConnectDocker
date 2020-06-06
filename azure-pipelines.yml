@@ -19,6 +19,11 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
       - task: Docker@2
+        inputs:
+          containerRegistry: 'DockerHub'
+          command: login
+
+      - task: Docker@2
         displayName: Build
         inputs:
           command: build
