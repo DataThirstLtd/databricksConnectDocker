@@ -10,4 +10,16 @@ stages:
   jobs:  
   - template: .build/azure-pipelines-job-build.yml
     parameters:
+      DBCVER: 6.5.1
+  - template: .build/azure-pipelines-job-build.yml
+    parameters:
       DBCVER: 6.4.1
+  - template: .build/azure-pipelines-job-build.yml
+    parameters:
+      DBCVER: 6.3.1
+  - template: .build/azure-pipelines-job-build.yml
+    parameters:
+      DBCVER: 6.2.0
+  - template: .build/azure-pipelines-job-build.yml
+    parameters:
+      DBCVER: 6.1.0
