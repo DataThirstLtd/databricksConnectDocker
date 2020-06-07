@@ -39,13 +39,14 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-4.5.11-Linux-x86
 ENV TINI_VERSION v0.16.1
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
 RUN chmod +x /usr/bin/tini
-ENTRYPOINT ["/usr/bin/tini", "--"]
-CMD  "printf 'y\n${DATABRICKSHOST}\n${DATABRICKSTOKEN}\n${DATABRICKSCLUSTERID}\n${DATABRICKSORGID}\n\n' | databricks-connect configure" 
+ENTRYPOINT ["/usr/bin/tini", "--" ]
+# CMD  
 
 
-COPY environment.yml .
+COPY environments/environment${DBCVER}.yml .
 RUN pip install --upgrade pip \
-    && conda env create -f environment.yml
+    && conda env create -f environment${DBCVER}.yml \
+    && echo '{}' > /root/.databricks-connect
 
 # VSCode DevContainers
 RUN apt-get update \
