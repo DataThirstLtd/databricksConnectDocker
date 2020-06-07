@@ -1,8 +1,3 @@
-# Docker
-# Build a Docker image 
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-# Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-
 trigger:
 - master
 
@@ -13,6 +8,6 @@ stages:
 - stage: Build
   displayName: Build image
   jobs:  
-  - template: .builds/azure-pipelines-job-build.yml
+  - template: .build/azure-pipelines-job-build.yml
     parameters:
       DBCVER: 641
