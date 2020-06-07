@@ -1,36 +1,36 @@
 parameters:
     DBCVER: ''
 
-  jobs:
-    - job: Build
-      variables:
-        DBCVER: ${{ parameters.DBCVER }}
-      displayName: Build-${{ parameters.DBCVER }}
-      pool:
-        vmImage: 'ubuntu-latest'
-      steps:
-        - task: Docker@2
-          inputs:
-            containerRegistry: 'DockerHub'
-            command: login
+jobs:
+  - job: Build
+    variables:
+      DBCVER: ${{ parameters.DBCVER }}
+    displayName: Build-${{ parameters.DBCVER }}
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'DockerHub'
+          command: login
 
-        - task: Docker@2
-          displayName: Build
-          inputs:
-            command: build
-            containerRegistry: 'DockerHub'
-            repository: datathirstltd/dbconnect
-            tags: |
-              $(DBCVER)-$(Build.BuildId)
-              $(DBCVER)
-            arguments: --build-arg DBCVER=$(DBCVER)
+      - task: Docker@2
+        displayName: Build
+        inputs:
+          command: build
+          containerRegistry: 'DockerHub'
+          repository: datathirstltd/dbconnect
+          tags: |
+            $(DBCVER)-$(Build.BuildId)
+            $(DBCVER)
+          arguments: --build-arg DBCVER=$(DBCVER)
 
-        - task: Docker@2
-          displayName: Push
-          inputs:
-            command: push
-            containerRegistry: 'DockerHub'
-            repository: datathirstltd/dbconnect
-            tags: |
-              $(DBCVER)-$(Build.BuildId)
-              $(DBCVER)
+      - task: Docker@2
+        displayName: Push
+        inputs:
+          command: push
+          containerRegistry: 'DockerHub'
+          repository: datathirstltd/dbconnect
+          tags: |
+            $(DBCVER)-$(Build.BuildId)
+            $(DBCVER)
