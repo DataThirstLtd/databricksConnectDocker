@@ -2,7 +2,7 @@ parameters:
     DBCVER: ''
 
 jobs:
-  - job: Build
+  - job: Build-${{ parameters.DBCVER }}
     variables:
       DBCVER: ${{ parameters.DBCVER }}
     displayName: Build-${{ parameters.DBCVER }}
