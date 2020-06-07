@@ -4,5 +4,5 @@ channels:
 dependencies:
   - python=3.7.3
   - pip:
-    - databricks-connect==6.3.0
+    - databricks-connect==6.3.1
     - six
