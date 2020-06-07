@@ -1,9 +1,9 @@
 parameters:
     DBCVER: ''
     DBCVERNODOTS: ''
-    
+
 jobs:
-  - job: Build-${{ parameters.DBCVERNODOTS }}
+  - job: Build_${{ parameters.DBCVERNODOTS }}
     variables:
       DBCVER: ${{ parameters.DBCVER }}
     displayName: Build-${{ parameters.DBCVER }}
