@@ -31,7 +31,7 @@ This maybe useful if you cannot run local containers and do not want to use a cl
 ```
 {
 	"context": "..",
-	"image": "datathirstltd/dbconnect:6.4.1",
+	"image": "datathirstltd/dbconnect:7.1.0",
 
 	"settings": {
 		"python.pythonPath": "/opt/conda/envs/dbconnect/bin/python",
