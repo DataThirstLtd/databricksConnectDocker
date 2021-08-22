@@ -6,4 +6,4 @@ dependencies:
   - pip:
     - databricks-connect==8.1.10
     - six
-diff --git a/azure-pipelines.yml b/azure-pipelines.yml
+
