@@ -1,0 +1,9 @@
+name: dbconnect
+channels:
+  - conda-forge
+dependencies:
+  - python=3.7.5
+  - pip:
+    - databricks-connect==7.3.21
+    - six
+
