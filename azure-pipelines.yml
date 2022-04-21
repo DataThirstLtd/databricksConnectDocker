@@ -10,15 +10,15 @@ stages:
   jobs:  
   - template: .build/azure-pipelines-job-build.yml
     parameters:
-      DBCVER: 9.1.0
-      DBCVERNODOTS: 910
+      DBCVER: 9.1.13
+      DBCVERNODOTS: 9113
 
   - template: .build/azure-pipelines-job-build.yml
     parameters:
-      DBCVER: 8.1.10
-      DBCVERNODOTS: 8110
+      DBCVER: 10.4.0b0
+      DBCVERNODOTS: 1040b0
 
   - template: .build/azure-pipelines-job-build.yml
     parameters:
-      DBCVER: 7.3.21
-      DBCVERNODOTS: 7321
+      DBCVER: 7.3.38
+      DBCVERNODOTS: 7338
