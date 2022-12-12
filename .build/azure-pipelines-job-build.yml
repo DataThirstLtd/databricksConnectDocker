@@ -16,9 +16,9 @@ jobs:
           command: login
 
       - task: Docker@2
-        displayName: Build
+        displayName: Build for AMD architecture
         inputs:
-          command: Build for AMD architecture
+          command: build
           containerRegistry: 'DockerHub'
           repository: datathirstltd/dbconnect
           tags: |
