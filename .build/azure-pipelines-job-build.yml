@@ -44,4 +44,6 @@ jobs:
           repository: datathirstltd/dbconnect
           tags: |
             $(DBCVER)-$(Build.BuildId)
+            $(DBCVER)
             $(DBCVER)-$(Build.BuildId)-arm64
+            $(DBCVER)-arm64
