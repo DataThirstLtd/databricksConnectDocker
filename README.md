@@ -1,3 +1,7 @@
+# DEPRECATED
+
+**This code is no longer maintained.**
+
 ## Databricks-Connect Container
 
 This container is designed for developing PySpark application in VS Code using Databricks-Connect. Technically it should work for Scala, Java & R - though I haven't tried.
