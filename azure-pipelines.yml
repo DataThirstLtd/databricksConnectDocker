@@ -27,3 +27,8 @@ stages:
     parameters:
       DBCVER: 7.3.38
       DBCVERNODOTS: 7338
+
+  - template: .build/azure-pipelines-job-build.yml
+    parameters:
+      DBCVER: 11.3.0b0
+      DBCVERNODOTS: 1130b0
