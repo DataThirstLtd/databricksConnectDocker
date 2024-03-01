@@ -16,7 +16,7 @@ jobs:
           command: login
 
       - task: Docker@2
-        displayName: Build
+        displayName: Build for AMD architecture
         inputs:
           command: build
           containerRegistry: 'DockerHub'
@@ -25,13 +25,26 @@ jobs:
             $(DBCVER)-$(Build.BuildId)
             $(DBCVER)
           arguments: --build-arg DBCVER=$(DBCVER)
-
       - task: Docker@2
-        displayName: Push
+        displayName: Build for ARM architecture
         inputs:
-          command: push
+          command: build
+          Dockerfile: Dockerfile_ARM64
           containerRegistry: 'DockerHub'
           repository: datathirstltd/dbconnect
           tags: |
-            $(DBCVER)-$(Build.BuildId)
-            $(DBCVER)
+            $(DBCVER)-$(Build.BuildId)-arm64
+            $(DBCVER)-arm64
+          arguments: --build-arg DBCVER=$(DBCVER) --platform linux/arm64/v8
+ 
+      # - task: Docker@2
+      #   displayName: Push
+      #   inputs:
+      #     command: push
+      #     containerRegistry: 'DockerHub'
+      #     repository: datathirstltd/dbconnect
+      #     tags: |
+      #       $(DBCVER)-$(Build.BuildId)
+      #       $(DBCVER)
+      #       $(DBCVER)-$(Build.BuildId)-arm64
+      #       $(DBCVER)-arm64
